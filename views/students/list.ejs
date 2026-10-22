@@ -1,0 +1,196 @@
+<style>
+  :root {
+    /* 核心绿色系变量 */
+    --primary-color: #10b981;    /* 翡翠绿 */
+    --primary-hover: #059669;    /* 深绿色 */
+    --danger-color: #ef4444;    /* 删除按钮保留红色（警示作用） */
+    --text-main: #064e3b;       /* 深绿文字 */
+    --text-muted: #6b7280;      /* 辅助文字 */
+    --bg-gray: #f0fdf4;         /* 极浅绿背景 */
+  }
+
+  /* 容器布局 */
+  .container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  h2 {
+    color: var(--text-main);
+  }
+
+  /* 顶部工具栏 */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+
+  .search-box {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .search-box input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box input:focus {
+    border-color: var(--primary-color);
+  }
+
+  .search-box button {
+    padding: 0.6rem 1.2rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .search-box button:hover {
+    background: var(--primary-hover);
+  }
+
+  .btn-add {
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .btn-add:hover {
+    background: var(--primary-hover);
+  }
+
+  /* 表格样式优化 */
+  .table-wrapper {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  th {
+    background: var(--bg-gray); /* 表头使用极浅绿 */
+    color: var(--text-main);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+  }
+
+  td {
+    padding: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+    font-size: 0.95rem;
+  }
+
+  tr:hover {
+    background-color: #f9fafb;
+  }
+
+  /* 操作按钮 */
+  .btn-delete {
+    color: var(--danger-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .btn-delete:hover {
+    background: #fef2f2;
+  }
+
+  .btn-back {
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover {
+    background: var(--bg-gray);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+</style>
+
+<div class="container">
+  <h2>学生列表</h2>
+
+  <div class="toolbar">
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a href="/" class="btn-back">← 返回首页</a>
+    </div>
+    
+    <form class="search-box" action="/students" method="GET">
+      <input name="keyword" placeholder="搜索学生姓名">
+      <button type="submit">查询</button>
+    </form>
+
+    <% if(user.role === 'admin'){ %>
+      <a href="/students/add" class="btn-add">+ 新增学生</a>
+    <% } %>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>专业</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% rows.forEach(s => { %>
+        <tr>
+          <td><strong><%= s.name %></strong></td>
+          <td><%= s.age %> 岁</td>
+          <td><%= s.major %></td>
+          <td>
+            <% if(user.role === 'admin'){ %>
+              <a href="/students/delete/<%= s.id %>" class="btn-delete" onclick="return confirm('确定要删除吗？')">删除</a>
+            <% } else { %>
+              <span style="color:#ccc">-</span>
+            <% } %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

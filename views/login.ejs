@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  :root {
+    /* 核心绿色系变量 */
+    --primary-color: #10b981;    /* 翡翠绿 */
+    --primary-hover: #059669;    /* 深绿色 */
+    --error-bg: #fef2f2;         /* 错误提示保持红色以示警告 */
+    --error-text: #ef4444;       /* 错误文字 */
+    --bg-gradient: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%); /* 浅绿向白渐变 */
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-gradient);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .login-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px; /* 增加圆角，更显现代感 */
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1); /* 带有微弱绿色的柔和阴影 */
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    border: 1px solid rgba(16, 185, 129, 0.1);
+  }
+
+  .login-card h2 {
+    margin: 0 0 1.5rem;
+    text-align: center;
+    color: #064e3b; /* 深绿色标题 */
+    font-size: 1.75rem;
+  }
+
+  .input-group {
+    margin-bottom: 1.25rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    background-color: #f9fafb;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); /* 绿色聚焦光晕 */
+    background-color: #fff;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px); /* 悬浮微动效 */
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+
+  button:active {
+    transform: translateY(0);
+  }
+
+  /* 错误消息容器 */
+  .error-message {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .footer-links {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  .footer-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="login-card">
+  <h2>用户登录</h2>
+
+  <% if(typeof error !== 'undefined' && error) { %>
+    <div class="error-message">
+      ⚠️ <%= error %>
+    </div>
+  <% } %>
+
+  <form method="post">
+    <div class="input-group">
+      <input name="username" placeholder="用户名" required autocomplete="username">
+    </div>
+    <div class="input-group">
+      <input name="password" type="password" placeholder="密码" required autocomplete="current-password">
+    </div>
+    <button type="submit">立即登录</button>
+  </form>
+
+  <div class="footer-links">
+    还没有账号？ <a href="/register">点击注册</a>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  :root {
+    /* 修改为绿色系变量 */
+    --primary-color: #10b981;    /* 翡翠绿 */
+    --primary-hover: #059669;    /* 深绿色 */
+    --bg-color: #f0fdf4;         /* 极浅绿背景 */
+    --text-color: #064e3b;       /* 深绿文字 */
+  }
+
+  body {
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .form-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 360px;
+  }
+
+  h2 {
+    margin: 0 0 1.5rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .input-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151; /* 稍深一点的灰色 */
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    /* 调整光晕颜色为绿色 */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+  }
+
+  button:hover {
+    background-color: var(--primary-hover);
+  }
+</style>
+</head>
+<body>
+
+<div class="form-card">
+  <h2>新增学生</h2>
+  <form method="post">
+    <div class="input-group">
+      <label>学生姓名</label>
+      <input type="text" name="name" placeholder="例如：张三">
+    </div>
+    
+    <div class="input-group">
+      <label>年龄</label>
+      <input type="number" name="age" placeholder="例如：20">
+    </div>
+    
+    <div class="input-group">
+      <label>所属专业</label>
+      <input type="text" name="major" placeholder="例如：计算机科学">
+    </div>
+    
+    <button type="submit">提交信息</button>
+  </form>
+</div>
+
+</body>
+</html>
